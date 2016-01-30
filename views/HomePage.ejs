@@ -1,0 +1,179 @@
+<html>
+<title></title>
+<head>
+<script type = "text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function() {
+            
+            
+
+            function init(){
+            
+                var command_args = [];
+                command_args[0] = 'person_id';
+
+
+                
+                $.ajax({
+                        url: '/home',
+                        method: "POST",
+                        data: {"order": JSON.stringify({run_method:"getReceivedRequests", command_args: command_args })},
+                        dataType: "json",
+                        success: function(data){
+
+                            var usernames = data.served.received_requests;
+                            console.log(usernames);
+                            $("#rRequests").empty();
+                            usernames.forEach(function(username) {
+                                var element = $('<li name="'+username+'" id="'+username+'">' +  username + '</li>');
+                                $("#rRequests").append(element);
+                            }, this);
+                            
+                            f();
+                            
+                        }
+                
+                    });
+                    
+                    
+                    function sr(){
+                    
+                    $.ajax({
+                        url: '/home',
+                        method: "POST",
+                        data: {"order": JSON.stringify({run_method:"getSentRequests", command_args: command_args })},
+                        dataType: "json",
+                        success: function(data){
+                        
+                            var usernames = data.served.sent_requests;
+                            $("#sRequests").empty();
+                            usernames.forEach(function(username) {
+                                var element = $('<li name="'+username+'" id="'+username+'">' +  username + '</li>');
+                                $("#sRequests").append(element);
+                            }, this);
+                            
+                        }
+                
+                    });
+                
+                    }
+                    
+                    
+                    
+                    
+                    function f(){
+                    
+                    
+                    $.ajax({
+                        url: '/home',
+                        method: "POST",
+                        data: {"order": JSON.stringify({run_method:"getFriends", command_args: command_args })},
+                        dataType: "json",
+                        success: function(data){
+                            
+                            var usernames = data.served.friends;
+                            $("#friends").empty();
+                            usernames.forEach(function(username) {
+                                var element = $('<li name="'+username+'" id="'+username+'">' +  username + '</li>');
+                                $("#friends").append(element);
+                            }, this);
+                            
+                            sr();
+                            
+                        }
+                        
+                        
+                
+                    });
+                    
+                    }
+                    
+                    
+                    
+     
+                
+  
+                
+             }
+             
+             init();
+             
+             
+             
+             
+             
+             
+             
+
+            
+            
+            $("#rRequests").on('click','li',function(){
+                var friend = $(this).text();
+                var command_args = [];
+                command_args[0] = 'person_id';
+                command_args[1] = friend;
+
+                $.ajax({
+                    url: '/home',
+                    method: "POST",
+                    data: {order: JSON.stringify({run_method:"acceptFriendRequest", command_args: command_args})},
+                    dataType: "json",
+                    success: function(data){
+                        var usernames = data.served.sent_requests;
+                        //there is a bug with the transaction- sort of
+                        //if(data.served){
+                            init();
+                        //}
+                    }
+                
+                });
+                
+            });
+            
+                        
+         
+      
+});
+   
+  
+</script>
+
+</head>
+<body>
+
+
+Home: <br><br>
+
+Hi, <%= username %>! <br>
+<a href="/settings"> Settings</a> <br>
+<a href="/signout">Sign out</a><br>
+<a href="/search"> Search for non-private users</a>
+<br>
+<br>
+Your Friends:
+<br>
+<div>
+<ul id="friends">
+
+</ul>
+</div>
+<br>
+Friends you have requested:
+<br>
+<div>
+<ul id="sRequests">
+
+</ul>
+</div>
+<br>
+Users awaiting a friend request reply (double click on name to add):
+<br>
+<div>
+<ul id="rRequests">
+
+</ul>
+</div>
+
+</body>
+</html>

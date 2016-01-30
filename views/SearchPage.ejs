@@ -1,0 +1,80 @@
+<html>
+<title></title>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+    
+            $('#searchForUsers').bind('change paste keyup',function () {
+                
+                var query = $('#searchForUsers').val();
+                var command_args = [];
+                command_args[0] = query;
+                var o = {run_method: 'getUsernamesByRegex', command_args: command_args};
+
+                $.ajax({
+                    url: '/search',
+                    method: "POST",
+                    data: {"order": JSON.stringify(o)},
+                    dataType: "JSON",
+                    success: function(data){
+
+                        var usernames = data.served.query_results;
+                        $("#results").empty();
+                        usernames.forEach(function(username) {
+                            var element = $('<li name="'+username+'" id="'+username+'">' +  username + '</li>');
+                            $("#results").append(element);
+                        }, this);
+
+                        }
+                
+                });
+ 
+            });
+            
+            $("#results").on('click','li',function(){
+                var receiver = $(this).text();
+                var command_args = [];
+                command_args[0] = 'person_id';
+                command_args[1] = receiver;
+                var o = {run_method: 'sendFriendRequest', command_args: command_args};
+                
+                $.ajax({
+                    url: '/search',
+                    method: "POST",
+                    data: {order: JSON.stringify(o)},
+                    dataType: "json",
+                    success: function(data){
+                        
+                    }
+                
+                });
+                
+            });
+           
+           
+               
+});
+  
+</script>
+
+
+</head>
+<body>
+
+  <a href = "/home"> back to your Home Page </a> 
+  <br>
+  <br>
+  Search:
+  <br>
+  <input type="text" id="searchForUsers"> Click on a name to request a friendship.
+  
+  <ul id = results>
+  
+  </ul>
+
+
+</body>
+</html>

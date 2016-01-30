@@ -1,0 +1,84 @@
+<html>
+<title></title>
+<head>
+<script type = "text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+        $("#signupContainer").on('click', '#submit', function(){
+                
+                var firstname = $("#firstname").val();
+                var lastname = $("#lastname").val();
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var email = $("#email").val();
+                
+                
+                
+                var command_args = [];
+                command_args[0] = username;
+                command_args[1] = password;
+                command_args[2] = email;
+                command_args[3] = "public";
+                var o = {run_method: 'createUser', command_args: command_args};
+                
+                $.ajax({
+                    url: '/signup',
+                    method: "POST",
+                    data: {"order": JSON.stringify(o)},
+                    dataType: "json",
+                    success: function(data){
+
+                        window.location = '/signin';
+
+                    }
+                
+                });
+                
+            });
+});
+
+</script>
+
+</head>
+<body>
+SignUp: 
+<br>
+<br>
+<div id="signupContainer">
+
+    First name: 
+    <br>
+    <input type="text" name="firstname" id="firstname">
+    <br>
+    
+    Last name: 
+    <br>
+    <input type="text" name="lastname" id="lastname"> 
+    <br>
+    
+    Username: 
+    <br>
+    <input type="text" name="username" id="username">
+    <br>
+    
+    Password: 
+    <br>
+    <input type="password" name="password" id="password">
+    <br>
+    
+    Email: 
+    <br>
+    <input type="text" name="email" id="email">
+    <br>
+    
+    <br>
+    <input type="button" id="submit" value="SignUp" name="submit">
+</div>
+<br>
+<br>
+</body>
+</html>

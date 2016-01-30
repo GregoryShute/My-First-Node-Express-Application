@@ -1,0 +1,63 @@
+<html>
+<title></title>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+        $("#changePW").on('click', '#submit', function(){
+                alert('hey');
+                var old_password = $("#oldPassword").val();
+                var new_password = $("#newPassword").val();
+                alert(old_password);
+                var command_args = [];
+                command_args[0] = 'person_id';
+                command_args[1] = old_password;
+                command_args[2] = new_password;
+                var o = {run_method: 'changePassword', command_args: command_args};
+                
+                $.ajax({
+                    url: '/settings',
+                    method: "POST",
+                    data: {"order": JSON.stringify(o)},
+                    dataType: "json",
+                    success: function(data){
+                        alert('password changed');
+                    }
+                
+                });
+                
+            });
+});
+
+
+</script>    
+            
+</head>
+<body>
+
+
+Change Password: 
+<br>
+<br>
+<div name="changePW" id="changePW" >
+    
+    Old Password: 
+    <br>
+    <input type="password" name="oldPassword" id="oldPassword">
+    <br>
+    
+    New Password: 
+    <br>
+    <input type="password" name="newPassword" id="newPassword">
+    <br>
+    <br>
+
+    
+    <input type="button" id="submit" value="Change Privacy" name="submit">  
+    
+</div>
+    
+</body>
+</html>
