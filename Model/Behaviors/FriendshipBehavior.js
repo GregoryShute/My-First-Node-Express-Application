@@ -90,9 +90,9 @@ var FriendshipBehavior = {
     areFriends(person_id, friend_id) {
 
         return knex('friendships')
-            .where({ 'friendOne_id': person_id, 'friendTwo_id': friend_id })
-            .orWhere('friendOne_id', friend_id)
-            .andWhere('friendTwo_id', person_id)
+            .where({ 'friend_one_id': person_id, 'friend_two_id': friend_id })
+            .orWhere('friend_one_id', friend_id)
+            .andWhere('friend_two_id', person_id)
             .then(function (data) {
 
                 if (data.length !== 0) {

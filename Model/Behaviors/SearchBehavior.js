@@ -25,7 +25,8 @@ var SearchBehavior = {
 
                 return row.username;
 
-            }).then(function(usernames){
+            })
+            .then(function(usernames){
                 
                 return {query_results: usernames };
                 

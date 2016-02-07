@@ -1,4 +1,4 @@
-var postgresUrl = 'postgres://localhost:5432/testdb';
+var postgresUri = require('./connectionString');
 
 function initKnex(){
     
@@ -7,7 +7,7 @@ function initKnex(){
     knex = require('knex')({
         
         client: 'pg',
-        connection: postgresUrl,
+        connection: postgresUri,
         pool: {
             min: 1,
             max: 10

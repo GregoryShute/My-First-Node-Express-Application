@@ -18,7 +18,7 @@ module.exports = function (app, passport) {
     //Index
 
     app.get('/', function (req, res) {
-
+        
         res.render('index', {
 
             isAuthenticated: req.isAuthenticated(),

@@ -28,7 +28,8 @@ module.exports = function (app) {
 
             return user;
 
-        })().then(function (user) {
+        })()
+            .then(function (user) {
 
             if (user !== null && user !== undefined) {
 

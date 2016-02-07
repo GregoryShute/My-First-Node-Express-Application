@@ -78,8 +78,23 @@ As a small aside, there are some buzzwords frequently mentioned on the internet 
 I may extend this project a little but this project was mostly just to test out Node and practice coding in Javascript. 
 
 #####How to Run:
+1. Install and start running postgres.
 
-I have not added database migrations yet. This means the setup function in Model/Database/dbSetup.js will need have to be invoked to set up the database the first time the app is run. This requires prior installation of a postgresql database. You may need to set your postgresql database to defer constraints during setup. Once the database is setup correctly, you should just be able to point node at the app in the command line and run the application on localhost. On the command line this would look like: $ node app.js.
+2. Install node.
+
+3. Create a postgres database.
+
+4. Replace the connection string in Model/Database/connectionString.js.
+Replace 5432 with the appropriate port and testdb with the appropriate database name.
+
+5. Open terminal and navigate to app.js
+
+6. To load the node module dependencies run $ npm install 
+
+5. To start the application run $ node app.js
+
+6. The app should now be running on localhost:3000.
+
 
 #####Special Notes:
 

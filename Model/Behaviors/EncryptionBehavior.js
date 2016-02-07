@@ -62,7 +62,7 @@ var EncryptionBehavior = {
         if (person) {
 
             var salt = person[0].salt;
-            var hashed_password = person[0].hashedPassword; // have to be careful when changing database types
+            var hashed_password = person[0].hashed_password; // have to be careful when changing database types
             return [hashed_password, salt];
 
         } else {
@@ -112,7 +112,7 @@ var EncryptionBehavior = {
             .where('person_id', person_id)
             .update({
 
-                hashedPassword: new_hashed_password //have to check on this because the database variable names need to be changed
+                hashed_password: new_hashed_password //have to check on this because the database variable names need to be changed
             
             })
             .return(true)

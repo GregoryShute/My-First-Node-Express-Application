@@ -91,7 +91,7 @@ var FriendshipBehaviorMotor = {
 
         return knex('friendships')
             .transacting(t)
-            .insert({ friendOne_id: person_id, friendTwo_id: friend_id })
+            .insert({ friend_one_id: person_id, friend_two_id: friend_id })
             .return(true)
             .catch(function (e) {
 
@@ -128,8 +128,8 @@ var FriendshipBehaviorMotor = {
     getFriendsListOne(person_id) {
 
         return knex('friendships')
-            .where('friendOne_id', person_id)
-            .from('people').innerJoin('friendships', 'people.person_id', 'friendships.friendTwo_id')
+            .where('friend_one_id', person_id)
+            .from('people').innerJoin('friendships', 'people.person_id', 'friendships.friend_two_id')
             .map(function (friend) {
 
                 return friend.username;
@@ -149,8 +149,8 @@ var FriendshipBehaviorMotor = {
     getFriendsListTwo(person_id) {
 
         return knex('friendships')
-            .where('friendTwo_id', person_id)
-            .from('people').innerJoin('friendships', 'people.person_id', 'friendships.friendOne_id')
+            .where('friend_two_id', person_id)
+            .from('people').innerJoin('friendships', 'people.person_id', 'friendships.friend_one_id')
             .map(function (friend) {
 
                 return friend.username;
