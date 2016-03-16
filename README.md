@@ -52,26 +52,6 @@ Security: Modularity makes it easy to close security holes.
 Database: Postgresql was chosen after experimenting with MongoDB.
 
 >MongoDB is a NoSQL database and Postgresql supports both SQL and NoSQL. NoSQL databases store collections of documents. SQL databases store tables of records. MongoDB supports atomic transactions within a document but not across collections. Although I found MongoDB easy to work with, I needed a database that supported atomic transactions across collections or tables. For this reason, I decided to go with Postgresql for this mini project. In the future I will probably look at other NoSQL solutions. There are many different databases available which are good for different types of applications.
-     
-#####Discussion: 
-
-The design concept follows a RPC style. The modularity of Behaviors reminds me of loadable kernel modules in Operating System design. The Pages component reminds me of microkernal design. The resemblances are currently slight but continuing with this design may drift closer to those design concepts. These are design concepts meant to deal with the huge pieces of software which are Operating Systems. Web applications are usually much smaller in comparison. For this reason I think that this design will work fine for any web application I create. 
-
-As a small aside, there are some buzzwords frequently mentioned on the internet which I do want to quickly mention. The buzzwords I am referring to are REST and SOAP.
-    
->Of these two buzzwords, REST seems to be the most popular and it is for that reason that I will briefly talk about in addition to the RPC type methodology I have used. Admittedly, I do not currently have experience with REST (or SOAP for that matter) which is why this aside will be more of a discussion than a comparison.
-    
->There are a large number of differing opinions on the internet regarding what REST means. REST appears to be an idea presented by Roy Thomas Fielding in his dissertation which is dated in the year 2000. In section 5.2 he presents the architectural elements of REST. The paper seems more like a guide to good practices rather than taking a hardline for a specific implementation so in general I do not see any contradiction for using RPC with architecture elements which are included in REST. This has probably been the reason for so many different opinions regarding what REST actually means on the internet but I am not sure as at the time of writing this I have only skimmed parts of the dissertation so I am not really qualified to answer much.
-    
->What I usually see on the internet is that a RESTful web app basically takes advantage of different route paths and HTTP verbs. I think my application could easily do this as well and I do think this could help with organization.
-    
->Regardless of what REST truly means, I have noticed some people have taken a hardline against RPC and for REST. I have seen many reasons for this which do not make sense to me which I why I want to mention a couple.
-    
->One thing I have read is that RPC causes tight coupling between the view and the model or between the client and the service and this is why REST is better than RPC. In my (one) experience, I have not found this to be the case. Coupling appears to be linear and I do not know how feasible it would be to have any less coupling. If you completely decoupled the client from the service, there would either be no web service or the web service would be never changing. I also do not think you can have something in between, such as log(n) coupling in this case, unless the complexity function inputs are strangely defined.
-    
->Other reasons for why REST is better than RPC tend to state ideas which are not unique to REST and can be easily implemented along with RPC. Caching for instance, is not a unique concept related to REST.
-
->My impression is that architectural elements of REST can be combined with RPC but again, this requires more investigation on my part.
 	
 #####Future:
 
