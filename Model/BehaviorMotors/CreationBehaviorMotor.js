@@ -1,4 +1,4 @@
-var knex = require('../database/knex');
+var knex = require('../Database/knex');
 var Promise = require('bluebird');
 
 
