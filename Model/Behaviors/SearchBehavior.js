@@ -1,4 +1,4 @@
-var knex = require('../database/knex');
+var knex = require('../Database/knex');
 var SearchBehaviorMotor = require('../BehaviorMotors/SearchBehaviorMotor');
 var SBM = SearchBehaviorMotor;
 
